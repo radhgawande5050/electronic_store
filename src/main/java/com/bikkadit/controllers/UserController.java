@@ -43,6 +43,7 @@ public class UserController {
         logger.info("Intiating controller request for createUser");
         UserDto userDto1 = userservice.createUser(userDto);
         userDto1.setIsactive(AppConstant.YES);
+        userDto1.setIsactive(AppConstant.NO);
         logger.info("Completed controller request for createUser");
         return new ResponseEntity<>(userDto1, HttpStatus.CREATED);
 

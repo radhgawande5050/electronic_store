@@ -86,7 +86,8 @@ public class UserServiceImpl implements UserService {
         }catch (IOException e){
             e.printStackTrace();
         }
-        user.setIsactive(AppConstant.NO);
+        user.setIsactive(AppConstant.YES);
+       
         logger.info("Completed dao request for delete user");
        userrepo.delete(user);
     }
