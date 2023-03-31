@@ -59,7 +59,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void delete(Long categoryId) {
         logger.info("Intiating dao request for delete category");
         Category category = categoryrepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException(AppConstant.CATEGORY_NOT_FOUND));
-
+       logger.info("Completed dao request for delete category");
         categoryrepo.delete(category);
     }
 
