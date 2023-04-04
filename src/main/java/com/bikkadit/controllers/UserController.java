@@ -100,6 +100,7 @@ public class UserController {
     @PostMapping("/image/{userId}")
     public ResponseEntity<ImageResponse> uploadUserImage(@RequestParam("userImage") MultipartFile image, @PathVariable long userId) throws IOException {
       logger.info("Initaiting controller request for upload user image");
+
         String imageName = fileservice.uploadFile(image, imageUploadPath);
 
         UserDto user = userservice.getUserById(userId);
