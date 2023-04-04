@@ -21,7 +21,7 @@ public class Category extends BaseEntity{
     private String title;
 
     @Column(name="category_desc",length=50)
-    private String Description;
+    private String description;
 
     private String coverImage;
 }
