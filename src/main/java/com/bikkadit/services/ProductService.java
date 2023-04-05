@@ -1,5 +1,6 @@
 package com.bikkadit.services;
 
+import com.bikkadit.dtos.PageableResponse;
 import com.bikkadit.dtos.ProductDto;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface ProductService {
 
     void deleteProduct(Long productId);
 
-    List<ProductDto> getAllProducts();
+    PageableResponse<ProductDto> getAllProducts(int pageNumber, int pageSize, String sortBy, String sortDir);
 
     ProductDto getsingleproduct(long productId);
 }
