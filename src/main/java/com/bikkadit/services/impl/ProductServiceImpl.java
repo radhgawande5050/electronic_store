@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,12 +71,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PageableResponse<ProductDto> getAllProducts(int pageNumber, int pageSize, String sortBy, String sortDir) {
-        logger.info("Initiating dao request for get all Products");
+        logger.info("Initiating dao request for getall products");
         Sort sort=(sortDir.equalsIgnoreCase("desc"))?(Sort.by(sortBy).descending()):(Sort.by(sortBy).ascending());
         PageRequest pagebale = PageRequest.of(pageNumber, pageSize,sort);
         Page<Product> page = productrepo.findAll(pagebale);
         PageableResponse<ProductDto> response = Helper.getPageableResponse(page, ProductDto.class);
-        logger.info("Completed dao request for get all Products");
+        logger.info("Completed dao request for get all products");
         return response;
     }
 
@@ -85,5 +86,29 @@ public class ProductServiceImpl implements ProductService {
         Product singleProduct = productrepo.findById(productId).orElseThrow(() -> new ResourceNotFoundException(AppConstant.PRODUCT_NOT_FOUND));
         logger.info("Completed dao request for gey single product");
         return this.mapper.map(singleProduct,ProductDto.class);
+    }
+
+    @Override
+    public PageableResponse<ProductDto> getAllLive(int pageNumber, int pageSize, String sortBy, String sortDir) {
+        logger.info("Initiating dao request for get all Products");
+        Sort sort=(sortDir.equalsIgnoreCase("desc"))?(Sort.by(sortBy).descending()):(Sort.by(sortBy).ascending());
+        PageRequest pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Product> page = productrepo.findByLiveTrue(pageable);
+        PageableResponse<ProductDto> response = Helper.getPageableResponse(page, ProductDto.class);
+        logger.info("Completed dao request for get all products");
+        return response;
+
+    }
+
+    @Override
+    public PageableResponse<ProductDto> searchByTitle(String subTitle,int pageNumber, int pageSize, String sortBy, String sortDir) {
+        logger.info("Initiating dao request for get all Products");
+        Sort sort=(sortDir.equalsIgnoreCase("desc"))?(Sort.by(sortBy).descending()):(Sort.by(sortBy).ascending());
+        PageRequest pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Product> page = productrepo.findByTitleContaining(subTitle,pageable);
+        PageableResponse<ProductDto> response = Helper.getPageableResponse(page, ProductDto.class);
+        logger.info("Completed dao request for get all products");
+        return response;
+
     }
 }
