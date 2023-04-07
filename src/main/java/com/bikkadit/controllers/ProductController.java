@@ -78,9 +78,9 @@ public class ProductController {
                                                                      @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
                                                                      @RequestParam(value = "sortBy", defaultValue = "title", required = false) String sortBy,
                                                                      @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir){
-        System.out.println("Initiating controller request for search ByTitle");
+        System.out.println("Initiating controller request for Search ByTitle");
         PageableResponse<ProductDto> searchByTitle = productservice.searchByTitle(subTitle, pageNumber, pageSize, sortBy, sortDir);
-        System.out.println("Completed cotroller request for search ByTitle");
+        System.out.println("Completed cotroller request for Search ByTitle");
         return new ResponseEntity<>(searchByTitle,HttpStatus.OK);
     }
 }
